@@ -11,6 +11,7 @@ body {
   font-family: $work-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
+  padding: 0;
 }
 
 button {
@@ -28,10 +29,13 @@ header {
   background-color: $white;
   display: flex;
   align-items: center;
-  padding: 0 24px;
   position: sticky;
   top: 0;
   z-index: 10;
+  padding: 0 213px;
+  @media (max-width: 480px) {
+    padding: 0 24px;
+  }
   .avatar {
     width: 33px;
     height: 33px;
@@ -56,17 +60,18 @@ header {
 
 .container {
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: $pinky-50;
+  position: relative;
+  z-index: 4;
   .backgroundImg {
     position: absolute;
-    top: 0;
-    object-fit: cover;
-    height: 732px;
+    top: -67px;
     width: 100%;
+    object-fit: cover;
     @media (max-width: 480px) {
       height: 667px;
       width: 90.91%;
@@ -82,17 +87,24 @@ header {
     justify-content: flex-end;
   }
   .definition {
-    margin-top: 63px;
     margin-bottom: 107px;
-    padding: 0 32px;
     display: flex;
     flex-direction: column;
+    padding: 0 32px;
+    max-width: 619px;
+    @media (max-width: 480px) {
+      margin-top: 63px;
+      padding: 0 32px;
+    }
     .text {
       text-align: right;
-      font-size: 16px;
       line-height: 1.5;
       letter-spacing: -0.57px;
       font-weight: 500;
+      font-size: 21px;
+      @media (max-width: 480px) {
+        font-size: 16px;
+      }
       em {
         font-weight: 700;
         color: $rich-blue;
@@ -102,74 +114,104 @@ header {
     .author {
       color: $white;
       margin-top: 20px;
-      font-size: 16px;
       font-weight: 600;
       font-style: italic;
       text-align: right;
+      font-size: 21px;
+      @media (max-width: 480px) {
+        font-size: 16px;
+      }
     }
   }
 
   // black background section (POV, Resource, Help&Tips, etc.)
-  .space-162 {
-    height: 162px;
+  .spacing-1 {
+    height: 191px;
+    @media (max-width: 480px) {
+      height: 162px;
+    }
   }
   .decor2 {
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    @media (min-width: 768px) {
+      position: absolute;
+      bottom: 0;
+    }
   }
 }
 
 .blackBg {
   background-color: $black;
+  z-index: 2;
 }
 
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 67px;
   z-index: 2;
+  margin-top: 87px;
+  @media (max-width: 480px) {
+    margin-top: 67px;
+  }
   .heroTitle {
-    font-size: 52px;
     font-weight: 900;
     color: $white;
     line-height: 0.98;
     text-align: center;
+    font-size: 62px;
+    @media (max-width: 480px) {
+      font-size: 52px;
+    }
   }
   .heroSubTitle {
     margin-top: 20px;
-    font-size: 16px;
     font-weight: 600;
     font-style: italic;
     color: $white;
     text-align: center;
+    font-size: 21px;
+    @media (max-width: 480px) {
+      font-size: 16px;
+    }
   }
   .heroImg {
     margin-top: 67px;
   }
   .heroBtn {
     margin-top: -105px;
-    margin-bottom: 67px;
     width: 231px;
     height: 58px;
     border-radius: 29px;
     box-shadow: 0 20px 30px 0 $pinky-50;
+    margin-bottom: 196px;
+    @media (max-width: 480px) {
+      margin-bottom: 67px;
+    }
   }
 }
 
 .testimonial {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 32px;
   display: flex;
   flex-direction: column;
   position: relative;
+  max-width: 619px;
+  @media (max-width: 480px) {
+    padding: 0 32px;
+  }
   .oval {
     position: absolute;
-    left: 57px;
-    top: -69px;
+    left: -89px;
+    top: -89px;
     z-index: 1;
+    @media (max-width: 480px) {
+      left: 57px;
+      top: -69px;
+    }
   }
   .title {
     font-size: 32px;
@@ -178,16 +220,28 @@ header {
     text-shadow: 0 20px 30px $pinky-50;
     z-index: 4;
     margin-bottom: 75px;
+    text-align: center;
+    @media (max-width: 480px) {
+      text-align: left;
+    }
   }
   .cards {
     position: absolute;
-    bottom: -95px;
+    box-sizing: border-box;
+    display: flex;
+    top: 43px;
+    padding: 25px 25px 29px;
+    @media (max-width: 480px) {
+      top: 68px;
+      padding: 0;
+    }
     .card {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       width: 247px;
       padding: 20px;
+      margin-right: 10px;
       background-color: $white;
       .author {
         font-size: 32px;
@@ -204,27 +258,48 @@ header {
 
 .desc {
   box-sizing: border-box;
-  width: 100%;
-  padding: 0 32px;
   display: flex;
   flex-direction: column;
   color: $white;
+  width: 619px;
+  margin-bottom: 67px;
+  text-align: center;
+  @media (max-width: 480px) {
+    padding: 0 32px;
+    width: 100%;
+    text-align: left;
+  }
+  &:nth-child(5) {
+    @media (min-width: 768px) {
+      margin-bottom: 203px;
+    }
+  }
+  .decor3 {
+    position: absolute;
+    right: 127px;
+  }
   .title {
     font-weight: 900;
     font-size: 32px;
     margin-bottom: 30px;
   }
   .content {
-    font-size: 16px;
     line-height: 1.5;
-    letter-spacing: -0.57px;
-    margin-bottom: 67px;
+    font-size: 18px;
+    letter-spacing: -0.64px;
+    @media (max-width: 480px) {
+      font-size: 16px;
+      letter-spacing: -0.57px;
+    }
   }
   .articles {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 67px;
+    gap: 10px;
+    @media (max-width: 480px) {
+      gap: 0;
+    }
     .article {
       flex: 0 1 311px;
       width: 311px;
@@ -252,6 +327,7 @@ header {
           margin-bottom: 0;
           width: 218px;
           margin-right: 16px;
+          text-align: left;
         }
         .ovalArrow {
           background: none;
@@ -262,14 +338,25 @@ header {
   }
 }
 
+.helpTips {
+  @media (min-width: 768px) {
+    width: 70%;
+    margin-top: 100px;
+    margin-bottom: 144px;
+  }
+}
+
 footer {
   box-sizing: border-box;
   background-color: $rich-blue;
   height: 67px;
-  padding: 27px 24px;
   display: flex;
   justify-content: space-between;
   color: $white;
+  padding: 27px 213px;
+  @media (max-width: 480px) {
+    padding: 27px 24px;
+  }
   .disclaimer {
     font-size: 12px;
   }

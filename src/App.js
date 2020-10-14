@@ -8,6 +8,7 @@ import heroImg from "./images/bitmap.png";
 import astronautRight from "./images/group-4.png";
 import astronautLeft from "./images/group-3.png";
 import oval from "./images/oval.png";
+import decor3 from "./images/path-3.png";
 
 import article1 from "./images/image.png";
 import article2 from "./images/image_2.png";
@@ -59,10 +60,17 @@ function App() {
           <span className="title">Testimonial</span>
           <div className="cards">
             <div className="card">
-              <span className="author"> Blu Kicks</span>
+              <span className="author">Blu Kicks</span>
               <span className="content">
                 Places where you can leverage tools and software to free up time
                 to focus on growing the business.
+              </span>
+            </div>
+            <div className="card">
+              <span className="author">Angelus</span>
+              <span className="content">
+                All those apps took me months to get running. Now the site
+                practically runs itself!
               </span>
             </div>
           </div>
@@ -70,7 +78,7 @@ function App() {
       </div>
 
       <div className="container blackBg">
-        <div className="space-162"></div>
+        <div className="spacing-1" />
         <div className="desc">
           <div className="title">POV</div>
           <div className="content">
@@ -89,7 +97,8 @@ function App() {
             prevents our being able to do what we like best
           </div>
         </div>
-        <div className="desc">
+        <div className="desc helpTips">
+          <img src={decor3} alt="pink bean" className="decor3" />
           <div className="title">Help & Tips</div>
           <div className="articles">
             <div className="article">
@@ -140,6 +149,7 @@ function App() {
           <img src={astronautLeft} alt="astronaut left" />
         </div>
       </div>
+
       <footer>
         <div className="disclaimer">
           <b>wknd</b>@2020
