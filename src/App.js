@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.scss";
 
 // images import
@@ -7,15 +7,65 @@ import bg from "./images/bg-1.png";
 import heroImg from "./images/bitmap.png";
 import astronautRight from "./images/group-4.png";
 import astronautLeft from "./images/group-3.png";
-import oval from "./images/oval.png";
 import decor3 from "./images/path-3.png";
-
-import article1 from "./images/image.png";
-import article2 from "./images/image_2.png";
-import article3 from "./images/image_3.png";
+import oval from "./images/oval.png";
 import ovalArrow from "./images/oval-icon.png";
+import {
+  fadeUpSlow,
+  slideDown,
+  slideUpElastic,
+  staggerReveal,
+  slideLeft,
+  slideRight,
+  onClickTransform,
+} from "./utils/animation";
 
 function App() {
+  const [testimonials, setTestimonials] = useState([]);
+  const [helpAndTips, setHelpAndTips] = useState([]);
+
+  // fetching
+  useEffect(() => {
+    fetch("https://wknd-take-home-challenge-api.herokuapp.com/testimonial")
+      .then((res) => res.json())
+      .then((data) => setTestimonials([...data]))
+      .catch((err) => console.error("Error: ", err));
+
+    fetch("https://wknd-take-home-challenge-api.herokuapp.com/help-tips")
+      .then((res) => res.json())
+      .then((data) => setHelpAndTips([...data]))
+      .catch((err) => console.error("Error: ", err));
+  }, []);
+
+  // carousel arrow functionality
+  const [carouselIndex, setCarouselIndex] = useState(1);
+  const [carouselTrans, setCarouselTrans] = useState(0);
+  const carouselNext = () => {
+    setCarouselIndex(carouselIndex + 1);
+    setCarouselTrans(carouselTrans - 257);
+  };
+  const carouselPrev = () => {
+    setCarouselIndex(carouselIndex - 1);
+    setCarouselTrans(carouselTrans + 257);
+  };
+
+  // animation
+  let heroBg = useRef(null);
+  let heroLego = useRef(null);
+  let heroBtn = useRef(null);
+  let heroTitle = useRef(null);
+  let decorRight = useRef(null);
+  let decorLeft = useRef(null);
+
+  useEffect(() => {
+    slideDown(heroBg, 0.3);
+    slideUpElastic(heroLego, 1);
+    fadeUpSlow(heroBtn, 3);
+    staggerReveal(heroTitle, 1.6);
+    slideLeft(decorRight);
+    slideRight(decorLeft);
+  }, []);
+
   return (
     <>
       <header>
@@ -29,21 +79,44 @@ function App() {
       </header>
 
       <div className="container">
-        <img className="backgroundImg" src={bg} alt="background" />
+        <img
+          className="backgroundImg"
+          src={bg}
+          alt="background"
+          id="heroBg"
+          ref={(el) => (heroBg = el)}
+        />
 
         <div className="hero">
-          <span className="heroTitle">WEEKEND FROM HOME</span>
+          <span className="heroTitle" ref={(el) => (heroTitle = el)}>
+            WEEKEND FROM HOME
+          </span>
           <span className="heroSubTitle">
             Stay active with a little workout.
           </span>
-          <img src={heroImg} alt="lego astronaut" className="heroImg" />
-          <button className="heroBtn">Let's Go</button>
+          <img
+            src={heroImg}
+            alt="lego astronaut"
+            className="heroImg"
+            ref={(el) => (heroLego = el)}
+          />
+          <button
+            className="heroBtn"
+            ref={(el) => (heroBtn = el)}
+            onClick={onClickTransform}
+          >
+            Let's Go
+          </button>
         </div>
       </div>
 
       <div className="container">
         <div className="decor1">
-          <img src={astronautRight} alt="astronaut right" />
+          <img
+            src={astronautRight}
+            alt="astronaut right"
+            ref={(el) => (decorRight = el)}
+          />
         </div>
         <div className="definition">
           <span className="text">
@@ -58,22 +131,33 @@ function App() {
         <div className="testimonial">
           <img src={oval} alt="blue oval" className="oval" />
           <span className="title">Testimonial</span>
-          <div className="cards">
-            <div className="card">
-              <span className="author">Blu Kicks</span>
-              <span className="content">
-                Places where you can leverage tools and software to free up time
-                to focus on growing the business.
-              </span>
-            </div>
-            <div className="card">
-              <span className="author">Angelus</span>
-              <span className="content">
-                All those apps took me months to get running. Now the site
-                practically runs itself!
-              </span>
+          <div className="cards" id="cards">
+            <div
+              className="cards_slider"
+              style={{ transform: `translateX(${carouselTrans}px)` }}
+            >
+              {testimonials.map((item) => (
+                <div className="card" key={item.id}>
+                  <span className="author">{item.by}</span>
+                  <span className="content">{item.testimony}</span>
+                </div>
+              ))}
             </div>
           </div>
+          <button
+            className="arrowLeft"
+            onClick={carouselPrev}
+            disabled={carouselIndex === 1}
+          >
+            <img src={ovalArrow} alt="arrow left" />
+          </button>
+          <button
+            className="arrowRight"
+            onClick={carouselNext}
+            disabled={carouselIndex === testimonials.length - 1}
+          >
+            <img src={ovalArrow} alt="arrow right" />
+          </button>
         </div>
       </div>
 
@@ -101,41 +185,19 @@ function App() {
           <img src={decor3} alt="pink bean" className="decor3" />
           <div className="title">Help & Tips</div>
           <div className="articles">
-            <div className="article">
-              <div className="background">
-                <img src={article1} alt="article 1" />
-              </div>
-              <div className="overlay">
-                <div className="title">Start quickly with simple steps</div>
-                <button className="ovalArrow">
-                  <img src={ovalArrow} alt="arrow right button" />
-                </button>
-              </div>
-            </div>
-            <div className="article">
-              <div className="background">
-                <img src={article2} alt="article 2" />
-              </div>
-              <div className="overlay">
-                <div className="title">
-                  Run smoothly at vero eos et accusamus
+            {helpAndTips.map((item) => (
+              <div className="article" key={item.id}>
+                <div className="background">
+                  <img src={`${item.image}`} alt={`${item.title}`} />
                 </div>
-                <button className="ovalArrow">
-                  <img src={ovalArrow} alt="arrow right button" />
-                </button>
+                <div className="overlay">
+                  <div className="title">{item.title}</div>
+                  <button className="ovalArrow">
+                    <img src={ovalArrow} alt="arrow right button" />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="article">
-              <div className="background">
-                <img src={article3} alt="article 3" />
-              </div>
-              <div className="overlay">
-                <div className="title">Denounce with righteous indignation</div>
-                <button className="ovalArrow">
-                  <img src={ovalArrow} alt="arrow right button" />
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="desc">
@@ -146,7 +208,11 @@ function App() {
           </div>
         </div>
         <div className="decor2">
-          <img src={astronautLeft} alt="astronaut left" />
+          <img
+            src={astronautLeft}
+            alt="astronaut left"
+            ref={(el) => (decorLeft = el)}
+          />
         </div>
       </div>
 
