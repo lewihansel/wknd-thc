@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <header className="container bg-white flex-row z-10">
-        <div className="mr-13" style={{ height: "33px" }}>
+        <div className="mr-13 h-33">
           <img src={avatar} alt="avatar" />
         </div>
         <div className="container item-left">
