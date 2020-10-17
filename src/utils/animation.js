@@ -80,7 +80,7 @@ export const slideLeft = (node, delay) => {
     delay: delay,
     scrollTrigger: {
       trigger: node,
-      start: "bottom 70%",
+      start: "top 30%",
     },
   });
   tl.to(node, {
@@ -115,7 +115,7 @@ export const slideRight = (node, delay) => {
 export const onClickTransform = (e) => {
   const button = e.target;
   gsap.to(button, {
-    duration: 0.2,
+    duration: 0.1,
     scale: 0.9,
     ease: "power3.out",
     repeat: 1,
