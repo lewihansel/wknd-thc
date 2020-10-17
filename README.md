@@ -1,3 +1,14 @@
+## WKND THC - Landing Page
+
+Mobile first landing page design.
+
+<img src="https://raw.githubusercontent.com/lewihansel/wknd-thc/main/src/images/screenshot1_(iPhone%206_7_8).png" alt="drawing" width="210" />
+<img src="https://raw.githubusercontent.com/lewihansel/wknd-thc/main/src/images/screenshot1.png" alt="drawing" width="665"/>
+
+<br/>
+<br/>
+<br/>
+<br/>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
